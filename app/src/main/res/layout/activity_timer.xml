@@ -9,6 +9,7 @@
 
     <Button
             android:text="Start"
+            android:onClick="startClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/button5"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -18,6 +19,7 @@
             android:layout_height="wrap_content" android:id="@+id/button3" app:layout_constraintEnd_toEndOf="parent"/>
     <Button
             android:text="Stop"
+            android:onClick="stopClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/button2"
             app:layout_constraintEnd_toStartOf="@+id/button3" app:layout_constraintTop_toTopOf="parent"
