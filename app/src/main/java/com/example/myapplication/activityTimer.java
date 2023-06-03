@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +16,10 @@ import java.util.concurrent.TimeUnit;
 import static com.example.myapplication.activityTimer.instance;
 
 public class activityTimer extends AppCompatActivity {
-    private @NonNull ActivityTimerBinding binding;
+
+    int[] Images = new int[] {R.drawable._0, R.drawable._5, R.drawable._10 ,R.drawable._15 ,R.drawable._20, R.drawable._25, R.drawable._30, R.drawable._35,R.drawable._40, R.drawable._45,R.drawable._50, R.drawable._55};
+    int ptr = 0;
+   private @NonNull ActivityTimerBinding binding;
     public static activityTimer instance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,32 +30,47 @@ public class activityTimer extends AppCompatActivity {
     }
     TimerTask task;
     public void startClick(View view) {
-        task = new TimerTask();
+        task = new TimerTask(binding.timer);
         task.execute();
+
+        binding.timer.setImageResource(Images[5]);
+
+        //так тоже не робит
+        binding.timer.post(new Runnable() {
+            @Override
+            public void run() {
+                binding.timer.setImageResource(R.drawable._20);
+            }
+        });
     }
     public void stopClick(View view) {
         task.cancel(true);
     }
 
-    public void OnTimerUpdate()
+    public void OnTimerUpdate(int time)
     {
-        String time = binding.time.getText().toString();
-        int timeAsInt = Integer.parseInt(time) + 1;
-        time = String.valueOf(timeAsInt);
-        binding.time.setText(time);
-        if (timeAsInt % 5 == 0)
+        binding.time.setText(String.valueOf(time));
+        if (time % 5 == 0)
         {
+            ptr++;
+            binding.timer.setImageResource(Images[ptr]);
 
         }
     }
 }
 class TimerTask extends AsyncTask<Void, Integer, Void> {
+    public ImageView timer;
+    public TimerTask(ImageView timer)
+    {
+        this.timer = timer;
+    }
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        instance.OnTimerUpdate();
-
+        instance.OnTimerUpdate(values[0]);
+        timer.setImageResource(R.drawable._20);
     }
+
     @Override
     protected Void doInBackground(Void... voids) {
         try{

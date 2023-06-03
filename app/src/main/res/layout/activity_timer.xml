@@ -23,14 +23,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/button2"
             app:layout_constraintEnd_toStartOf="@+id/button3" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button5"/>
-    <EditText
+            app:layout_constraintStart_toEndOf="@+id/button5" app:layout_constraintHorizontal_bias="0.496"
+            android:layout_marginTop="4dp"/>
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="time"
             android:ems="10"
             android:text="0"
             android:id="@+id/time"
             app:layout_constraintTop_toBottomOf="@+id/button3"
             app:layout_constraintStart_toStartOf="parent"/>
+    <ImageView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/_0"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.497"
+            android:layout_marginBottom="76dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
