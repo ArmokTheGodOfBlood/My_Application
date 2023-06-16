@@ -30,18 +30,12 @@ public class activityTimer extends AppCompatActivity {
     }
     TimerTask task;
     public void startClick(View view) {
-        task = new TimerTask(binding.timer);
-        task.execute();
+        //task = new TimerTask(binding.timer);
+        //task.execute();
 
-        binding.timer.setImageResource(Images[5]);
-
-        //так тоже не робит
-        binding.timer.post(new Runnable() {
-            @Override
-            public void run() {
-                binding.timer.setImageResource(R.drawable._20);
-            }
-        });
+        Timer task = new Timer();
+        task.timer = binding.timer;
+        task.run();
     }
     public void stopClick(View view) {
         task.cancel(true);
@@ -55,6 +49,26 @@ public class activityTimer extends AppCompatActivity {
             ptr++;
             binding.timer.setImageResource(Images[ptr]);
 
+        }
+    }
+}
+
+
+class Timer implements Runnable
+{
+    public ImageView timer;
+    int counter = 0;
+    @Override
+    public void run() {
+        while(true)
+        {try {
+            TimeUnit.SECONDS.sleep(1);
+            counter++;
+        } catch (InterruptedException e) {
+            //throw new RuntimeException(e);
+        }
+        instance.OnTimerUpdate(counter);
+        timer.setImageResource(R.drawable._20);
         }
     }
 }

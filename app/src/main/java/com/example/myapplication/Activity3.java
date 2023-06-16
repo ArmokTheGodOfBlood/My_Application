@@ -28,14 +28,22 @@ public class Activity3 extends AppCompatActivity {
         setContentView(R.layout.activity_3);
         db = getBaseContext().openOrCreateDatabase("app.db", MODE_ENABLE_WRITE_AHEAD_LOGGING, null);
 
-        Cursor query = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+        Cursor query = db.rawQuery("SELECT * FROM sqlite_master WHERE type='table'", null);
 
         Vector<String> users = new Vector<String>();
+        users.addElement("db path is '" + db.getPath() + "'");
+        users.addElement("db name is '" + db.getPath().split("/")[db.getPath().split("/").length - 1] + "'");
+
         if (query.moveToFirst()) {
             while (!query.isAfterLast()) {
                 @SuppressLint("Range") String tableName = query.getString(query.getColumnIndex("name"));
+                String comm = "SELECT * FROM " + query.getString(query.getColumnIndex("name"));
+                Cursor subquery = db.rawQuery(comm, null);
+                subquery.moveToFirst();
 
-                users.addElement(query.getString(query.getColumnIndex("name")));
+                users.addElement(query.getString(query.getColumnIndex("name")) + " - " +
+                        subquery.getColumnCount() + " - " +
+                        subquery.getCount());
 
                 query.moveToNext();
             }

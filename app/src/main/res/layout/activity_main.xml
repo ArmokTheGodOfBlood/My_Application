@@ -7,6 +7,13 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
     <Button
+            android:text="Clicable List"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/button_7"
+            app:layout_constraintStart_toEndOf="@+id/buttonl" app:layout_constraintEnd_toStartOf="@+id/buttonr"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="64dp"
+            app:layout_constraintHorizontal_bias="0.495"/>
+    <Button
             android:text="Left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/buttonl"
