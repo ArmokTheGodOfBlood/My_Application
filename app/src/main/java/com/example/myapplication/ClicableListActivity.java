@@ -46,6 +46,13 @@ public class ClicableListActivity extends AppCompatActivity {
         for (int i = 0; i < Captions.size(); i++)
         {
             TextView item = new TextView(this);
+            item..setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(ClicableListActivity.this, ClicableListActivity.class);
+                startActivity(myIntent);
+            }
+        });
             item.setText(capts[i] + "\n" + cnts[i]);
             Containers.add(item);
             listView.addView(item);
