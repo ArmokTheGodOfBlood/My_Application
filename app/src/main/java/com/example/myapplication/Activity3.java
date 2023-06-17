@@ -35,8 +35,10 @@ public class Activity3 extends AppCompatActivity {
         users.addElement("db name is '" + db.getPath().split("/")[db.getPath().split("/").length - 1] + "'");
 
         if (query.moveToFirst()) {
+            int nameIndex = query.getColumnIndex();
+            
             while (!query.isAfterLast()) {
-                @SuppressLint("Range") String tableName = query.getString(query.getColumnIndex("name"));
+                String tableName = query.getString(query.getColumnIndex("name"));
                 String comm = "SELECT * FROM " + query.getString(query.getColumnIndex("name"));
                 Cursor subquery = db.rawQuery(comm, null);
                 subquery.moveToFirst();
@@ -45,6 +47,7 @@ public class Activity3 extends AppCompatActivity {
                         subquery.getColumnCount() + " - " +
                         subquery.getCount());
 
+                subquery.Close();
                 query.moveToNext();
             }
         }
