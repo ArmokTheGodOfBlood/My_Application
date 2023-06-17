@@ -39,13 +39,13 @@ public class Activity3 extends AppCompatActivity {
             
             while (!query.isAfterLast()) {
                 String tableName = query.getString(query.getColumnIndex("name"));
-                String comm = "SELECT * FROM " + query.getString(query.getColumnIndex("name"));
+                String comm = "SELECT count(1), rowcount FROM pragma_table_info('" + query.getString(query.getColumnIndex("name") + "'");
                 Cursor subquery = db.rawQuery(comm, null);
                 subquery.moveToFirst();
 
                 users.addElement(query.getString(query.getColumnIndex("name")) + " - " +
-                        subquery.getColumnCount() + " - " +
-                        subquery.getCount());
+                        subquery.getInt(0) + " - " +
+                        subquery.getInt(1));
 
                 subquery.Close();
                 query.moveToNext();
