@@ -39,15 +39,23 @@ public class Activity3 extends AppCompatActivity {
             
             while (!query.isAfterLast()) {
                 String tableName = query.getString(query.getColumnIndex("name"));
-                String comm = "SELECT count(1), rowcount FROM pragma_table_info('" + query.getString(query.getColumnIndex("name") + "'");
+                String comm = "SELECT count(1), rowcount FROM " + query.getString(query.getColumnIndex("name"));
                 Cursor subquery = db.rawQuery(comm, null);
                 subquery.moveToFirst();
-
-                users.addElement(query.getString(query.getColumnIndex("name")) + " - " +
-                        subquery.getInt(0) + " - " +
-                        subquery.getInt(1));
-
+                int rows = subquery.getInt(0) + " - " + //rows
                 subquery.Close();
+                
+                comm = "SELECT *, rowcount FROM " + query.getString(query.getColumnIndex("name") + "Limit 1");
+                subquery = db.rawQuery(comm, null);
+                subquery.moveToFirst();
+                int collumns = subquery.getInt(0)//collumns
+                subquery.Close();
+                    
+                users.addElement(query.getString(query.getColumnIndex("name")) + " - " +
+                        rows  + " - " + 
+                        collumns;
+
+               
                 query.moveToNext();
             }
         }
