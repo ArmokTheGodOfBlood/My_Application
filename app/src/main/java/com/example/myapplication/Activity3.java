@@ -45,7 +45,7 @@ public class Activity3 extends AppCompatActivity {
                 int rows = subquery.getInt(0) + " - " + //rows
                 subquery.Close();
                 
-                comm = "SELECT *, rowcount FROM " + query.getString(query.getColumnIndex("name") + "Limit 1");
+                comm = "SELECT * FROM " + query.getString(query.getColumnIndex("name") + "Limit 1");
                 subquery = db.rawQuery(comm, null);
                 subquery.moveToFirst();
                 int collumns = subquery.getInt(0)//collumns
